@@ -1,0 +1,24 @@
+﻿{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|)([^']*)(?:'|\"|)"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "continue.telemetryEnabled": false,
+  "workbench.colorTheme": "Default Light Modern",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#e5f3e5",
+    "statusBar.background": "#22c55e",
+    "statusBar.foreground": "#ffffff"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.next": true,
+    "**/node_modules": true
+  }
+}
