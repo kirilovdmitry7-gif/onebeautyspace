@@ -1,0 +1,608 @@
+# Cursor AI Rules - One Beauty App
+
+## Язык общения - ОБЯЗАТЕЛЬНО
+
+### Все ответы и комментарии на РУССКОМ языке
+- **ВСЕГДА** отвечай на русском языке
+- Комментарии в коде на русском языке
+- Сообщения об ошибках на русском языке
+- Объяснения решений на русском языке
+- Техническая документация на русском языке
+
+```typescript
+// ✅ ПРАВИЛЬНО - комментарии на русском
+const calculateWellnessScore = (data: HealthData) => {
+  // Рассчитываем индекс здоровья на основе введенных данных
+  const sleepScore = data.sleep >= 7 ? 100 : (data.sleep / 7) * 100
+  // Проверяем корректность данных перед расчетом
+  if (data.water < 0) {
+    throw new Error("Количество воды не может быть отрицательным")
+  }
+  return totalScore
+}
+
+// ❌ НЕПРАВИЛЬНО - комментарии на английском
+const calculateScore = (data) => {
+  // Calculate wellness score based on user input
+  // Check data validity before calculation
+}
+```
+
+### Исключения (английский язык только для):
+- Названия переменных, функций, классов (camelCase/PascalCase)
+- Git commit messages (можно на английском)
+- Технические термины без перевода (API, URL, HTTP, etc.)
+- Сообщения в console.log для отладки (можно на английском)
+
+## Проект: One Beauty - Health, Beauty & Wellness App
+
+### Технологический стек
+- **Framework:** Next.js 14 с App Router
+- **Language:** TypeScript (строгий режим)
+- **Styling:** Tailwind CSS
+- **Database:** Prisma + SQLite (dev) / PostgreSQL (prod)
+- **State:** Zustand для глобального состояния
+- **Forms:** React Hook Form + Zod валидация
+- **Auth:** NextAuth.js
+- **Icons:** Lucide React
+- **UI Components:** Radix UI primitives
+
+### Структура проекта
+```
+src/
+├── app/          # Next.js App Router страницы
+├── components/   # React компоненты
+│   ├── ui/       # Переиспользуемые UI компоненты
+│   ├── auth/     # Авторизация
+│   ├── health/   # Модуль здоровья
+│   ├── studio/   # Модуль салона красоты
+│   └── store/    # Модуль магазина
+├── lib/          # Утилиты и конфигурации
+├── stores/       # Zustand stores
+└── types/        # TypeScript типы
+```
+
+## Правила кодирования
+
+### TypeScript
+- Всегда используй строгую типизацию
+- Создавай интерфейсы в `src/types/`
+- Используй дженерики для переиспользования типов
+- Обязательная типизация props компонентов
+
+### React компоненты
+- Функциональные компоненты с TypeScript
+- Props интерфейс с суффиксом `Props`
+- Деструктуризация props в параметрах функции
+- Default export для основных компонентов
+- Named export для вспомогательных
+
+```typescript
+interface ButtonProps {
+  variant?: 'primary' | 'secondary'
+  children: React.ReactNode
+  onClick?: () => void
+}
+
+export default function Button({ variant = 'primary', children, onClick }: ButtonProps) {
+  // implementation
+}
+```
+
+### Стилизация (Tailwind)
+- Мобильный first подход: `sm:`, `md:`, `lg:`
+- Используй утилиту `cn()` из `lib/utils.ts` для условных классов
+- Цветовая палитра: `primary`, `beauty-pink`, `beauty-purple`, `beauty-gold`
+- Консистентный spacing: `gap-4`, `p-4`, `m-4`
+
+### Именование файлов
+- Компоненты: PascalCase (`UserProfile.tsx`)
+- Страницы: kebab-case (`health-dashboard.tsx`)
+- Утилиты: camelCase (`healthCalculations.ts`)
+
+### State Management (Zustand)
+- Отдельный store для каждого модуля
+- Типизированные stores
+- Persist для важных данных
+
+## Бизнес-логика приложения
+
+### Модуль Health - КРИТИЧЕСКИ ВАЖНО
+**БЕЗОПАСНОСТЬ ЗДОРОВЬЯ:**
+- Никогда не поощряй экстремальные диеты или ограничения
+- Daily Wellness Score должен мотивировать, а не критиковать
+- Рекомендации только позитивные и сбалансированные
+- Блокируй ввод нереальных значений (например, 0 калорий)
+- Предупреждения о консультации с врачом при необходимости
+
+**Компоненты Health модуля:**
+- `DailyWellnessScore` - основной индикатор здоровья
+- `HealthDiary` - форма ввода показателей
+- `WellnessCards` - персонализированные рекомендации
+- `SubscriptionTiers` - Basic/Light/Pro функционал
+
+### Подписки
+- **Basic (Free):** базовый функционал
+- **Light (Paid):** персонализация + расширенный дневник
+- **Pro (Paid):** полная аналитика + медицинские данные
+
+### UI/UX принципы
+- Простота и интуитивность
+- Крупные элементы для мобильных
+- Быстрая загрузка (< 3 сек)
+- Accessibility: alt тексты, клавиатурная навигация
+- Поддержка темной темы
+
+## Интеграции и API
+
+### База данных (Prisma)
+- Всегда используй `src/lib/db.ts` для подключения
+- Типизированные запросы
+- Error handling для всех DB операций
+- Транзакции для связанных операций
+
+### Авторизация (NextAuth.js)
+- Поддержка email/password, Google, Apple ID
+- Protected routes через middleware
+- Роли пользователей: user, admin
+
+### Формы (React Hook Form + Zod)
+- Валидация на клиенте и сервере
+- Оптимистичные UI обновления
+- Loading и error states
+
+## Performance и оптимизация
+
+- React.memo для тяжелых компонентов
+- Lazy loading для модулей
+- Image optimization через Next.js Image
+- Bundle размер < 500KB initial load
+
+## Тестирование
+
+- Компоненты должны рендериться без errors
+- Формы валидируются корректно
+- Mobile responsive на всех экранах
+- TypeScript компилируется без warnings
+
+## Security
+
+- Валидация всех пользовательских вводов
+- Санитизация данных перед сохранением
+- HTTPS only в production
+- Rate limiting для API routes
+
+## Примеры использования
+
+### Health компонент:
+```typescript
+interface HealthEntryProps {
+  userId: string
+  onSave: (data: HealthEntry) => void
+}
+
+export default function HealthEntry({ userId, onSave }: HealthEntryProps) {
+  // Zod схема для валидации
+  // React Hook Form для обработки
+  // Позитивные сообщения обратной связи
+}
+```
+
+### API route:
+```typescript
+export async function POST(request: Request) {
+  // Валидация входных данных
+  // Авторизация пользователя
+  // Безопасная работа с БД
+  // Структурированный ответ
+}
+```
+
+## MCP Context7 интеграция - ОБЯЗАТЕЛЬНО
+
+### Использование Context7 для документации
+- **ВСЕГДА** используй Context7 MCP для получения актуальной документации
+- Перед использованием любой библиотеки: `Context7:resolve-library-id` → `Context7:get-library-docs`
+- Примеры запросов Context7:
+  - React hooks: `/reactjs/react.dev` с топиком `hooks`
+  - Next.js: `/vercel/next.js` с топиком `app-router`
+  - Tailwind: `/tailwindcss/tailwindcss` с топиком `utilities`
+- Всегда проверяй актуальные API и syntax через Context7
+
+### Память контекста между сессиями
+- **ВАЖНО:** Всегда читай файлы проекта для понимания текущего состояния
+- Проверяй существующие компоненты в `src/components/` перед созданием новых
+- Анализируй `src/types/` для понимания используемых типов
+- Читай `package.json` для списка доступных зависимостей
+- Изучай существующие stores в `src/stores/` для консистентности
+
+## Защита от ошибок и надежность
+
+### Безопасность разработки
+- **НИКОГДА** не перезаписывай существующие файлы без явного указания
+- Всегда создавай backup или версионируй изменения
+- При ошибках - предлагай исправления, а не переписывание с нуля
+- Сохраняй работающий функционал при добавлении нового
+
+### Error Handling - ОБЯЗАТЕЛЬНО
+```typescript
+// Всегда оборачивай в try-catch
+try {
+  const result = await riskyOperation()
+  return result
+} catch (error) {
+  console.error('Operation failed:', error)
+  // Graceful fallback или user-friendly сообщение
+}
+
+// React Error Boundaries для UI
+export function ComponentWithErrorBoundary() {
+  return (
+    <ErrorBoundary fallback={<ErrorFallback />}>
+      <YourComponent />
+    </ErrorBoundary>
+  )
+}
+```
+
+### Валидация данных - КРИТИЧНО
+```typescript
+// Zod схемы для всех пользовательских данных
+const HealthEntrySchema = z.object({
+  mood: z.number().min(1).max(5),
+  sleep: z.number().min(0).max(24),
+  water: z.number().min(0).max(10), // литры
+  steps: z.number().min(0).max(100000)
+})
+
+// Валидация перед обработкой
+const validatedData = HealthEntrySchema.safeParse(userInput)
+if (!validatedData.success) {
+  // Обработка ошибки валидации
+}
+```
+
+### Loading и состояния ошибок
+```typescript
+// Всегда показывай loading состояния
+const [isLoading, setIsLoading] = useState(false)
+const [error, setError] = useState<string | null>(null)
+
+// UI должен отражать все состояния
+if (isLoading) return <LoadingSpinner />
+if (error) return <ErrorMessage error={error} />
+return <SuccessContent />
+```
+
+### Защита Health модуля - ПРИОРИТЕТ
+```typescript
+// Блокировка экстремальных значений
+const validateHealthInput = (data: HealthInput) => {
+  // Предупреждения для подозрительных паттернов
+  if (data.calories < 800) {
+    throw new Error("Слишком низкое потребление калорий. Консультируйтесь с врачом.")
+  }
+  
+  if (data.weight_change < -5) { // кг за неделю
+    return { warning: "Быстрая потеря веса может быть опасна" }
+  }
+  
+  // Только позитивные формулировки в UI
+  return { success: true }
+}
+```
+
+### Проверки перед деплоем
+- TypeScript компилируется без ошибок: `npm run type-check`
+- Linting проходит: `npm run lint`  
+- Build успешен: `npm run build`
+- Основные страницы загружаются без ошибок в консоли
+
+### Работа с внешними API
+```typescript
+// Всегда с retry логикой и timeout
+const apiCall = async (url: string, options: RequestInit) => {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10000) // 10s timeout
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`)
+    }
+    
+    return await response.json()
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+```
+
+### Mobile-first безопасность
+- Всегда тестируй на мобильных размерах экрана
+- Touch targets минимум 44px
+- Не полагайся на hover эффекты
+- Предусматривай медленные соединения
+
+### Database безопасность
+```typescript
+// Всегда используй транзакции для связанных операций
+const updateUserHealth = async (userId: string, data: HealthData) => {
+  return await prisma.$transaction(async (tx) => {
+    const user = await tx.user.update({
+      where: { id: userId },
+      data: { lastActivity: new Date() }
+    })
+    
+    const healthEntry = await tx.healthEntry.create({
+      data: { ...data, userId }
+    })
+    
+    return { user, healthEntry }
+  })
+}
+```
+
+## Отслеживание прогресса разработки - КРИТИЧНО
+
+### ВСЕГДА начинай с анализа текущего состояния
+```typescript
+// 1. ПЕРВЫМ ДЕЛОМ - читай PROJECT_STATUS.md в корне проекта
+// 2. Анализируй существующие файлы в папках:
+//    - src/app/ - какие страницы уже созданы
+//    - src/components/ - какие компоненты существуют  
+//    - src/stores/ - какие stores настроены
+//    - src/types/ - какие типы определены
+
+// 3. Читай package.json для понимания зависимостей
+// 4. Проверяй prisma/schema.prisma для состояния БД
+```
+
+### Файл статуса проекта (PROJECT_STATUS.md)
+Создай и поддерживай в актуальном состоянии файл PROJECT_STATUS.md:
+
+```markdown
+# One Beauty App - Development Status
+
+## Completed Features ✅
+- [x] Project setup (Next.js + TypeScript + Tailwind)
+- [x] Prisma database connection
+- [x] Basic project structure
+- [ ] User authentication
+- [ ] Health module
+- [ ] Studio module
+
+## Current Sprint: Authentication Module
+**Status:** In Progress
+**Components created:**
+- LoginForm.tsx (completed)
+- RegisterForm.tsx (in progress)
+
+**API Routes:**
+- /api/auth/login (completed)
+- /api/auth/register (todo)
+
+## Next Up:
+1. Complete user registration
+2. Email verification
+3. Password reset flow
+
+Last updated: [timestamp]
+```
+
+### Система комментариев в коде
+```typescript
+// PROGRESS: [COMPONENT_NAME] - [STATUS] - [DATE]
+// PROGRESS: LoginForm - COMPLETED - 2025-01-15
+// PROGRESS: HealthDashboard - IN_DEVELOPMENT - 2025-01-16
+// DEPENDENCIES: Requires UserStore, HealthTypes
+
+export default function ComponentName() {
+  // TODO: Add error handling for API calls
+  // FIXME: Mobile responsive issues on small screens
+  // NOTE: This component integrates with Health module
+}
+```
+
+### Git commit сообщения как история
+```bash
+# Структурированные коммиты для отслеживания
+git commit -m "feat(auth): complete login form with validation
+
+- Add LoginForm component with React Hook Form
+- Integrate Zod validation schema  
+- Add error handling and loading states
+- PROGRESS: Auth module 30% complete"
+```
+
+### Контрольные точки (Checkpoints)
+```typescript
+// CHECKPOINT: После каждого крупного компонента
+// Создавай checkpoint комментарий в PROJECT_STATUS.md:
+
+/* 
+CHECKPOINT: Auth Module Complete - 2025-01-15
+✅ LoginForm - working, tested
+✅ RegisterForm - working, tested  
+✅ Password reset - working, tested
+✅ Email verification - working, tested
+
+READY FOR: Health Module development
+BLOCKED: None
+NEXT: Create HealthDashboard component
+*/
+```
+
+### Файловая организация для отслеживания
+```
+docs/
+├── PROJECT_STATUS.md     # Главный файл статуса
+├── COMPONENTS_MAP.md     # Карта всех компонентов  
+├── API_ENDPOINTS.md      # Список всех API
+└── DATABASE_SCHEMA.md    # Состояние БД схемы
+
+src/components/
+├── auth/
+│   ├── LoginForm.tsx     # COMPLETED
+│   ├── RegisterForm.tsx  # IN_PROGRESS  
+│   └── README.md         # Описание модуля auth
+├── health/
+│   └── README.md         # TODO: Health components
+```
+
+### Избегание дублирования
+```typescript
+// ПЕРЕД созданием нового компонента:
+// 1. Проверь существует ли подобный в src/components/
+// 2. Читай README.md в соответствующей папке
+// 3. Ищи похожую логику в existing components
+
+// Пример проверки:
+// "Нужен компонент для отображения пользователя" 
+// → Проверяй src/components/ui/ есть ли UserAvatar, UserCard
+// → Проверяй src/components/auth/ есть ли UserProfile  
+// → Только потом создавай новый
+```
+
+### Dependency tracking
+```typescript
+// В каждом новом файле указывай зависимости:
+/*
+DEPENDENCIES:
+- UserStore (from src/stores/userStore.ts)
+- HealthTypes (from src/types/health.ts)  
+- Button (from src/components/ui/Button.tsx)
+
+PROVIDES:
+- HealthDashboard component
+- useHealthData hook
+
+INTEGRATES_WITH:
+- src/app/health/page.tsx
+- src/components/health/WellnessScore.tsx
+*/
+```
+
+### Testing progress tracking
+```typescript
+// Система тестирования статуса
+// В каждом компоненте добавляй:
+
+export default function MyComponent() {
+  // TESTING_STATUS: 
+  // ✅ Renders without errors
+  // ✅ Mobile responsive  
+  // ✅ Form validation works
+  // ❌ Error handling needs testing
+  // ❌ Loading states not tested
+  
+  return <div>Component content</div>
+}
+```
+
+### Progress dashboard в коде
+```typescript
+// src/lib/progressTracker.ts
+export const PROJECT_PROGRESS = {
+  auth_module: {
+    status: 'completed',
+    progress: 100,
+    components: ['LoginForm', 'RegisterForm', 'PasswordReset'],
+    last_updated: '2025-01-15'
+  },
+  health_module: {
+    status: 'in_progress', 
+    progress: 30,
+    components: ['HealthDashboard'],
+    next_tasks: ['WellnessScore', 'HealthDiary'],
+    last_updated: '2025-01-16'
+  }
+} as const
+```
+
+## Финальная инструкция для размещения в Cursor
+
+### НЕ делай НИКОГДА:
+- Не используй `any` типы  
+- Не смешивай логику с UI компонентами
+- Не создавай inline styles
+- Не забывай error boundaries и loading states
+- **НЕ ПООЩРЯЙ нездоровые привычки в Health модуле**
+- Не перезаписывай существующие рабочие компоненты без явного указания
+- Не создавай дублирующие функции или типы
+- Не игнорируй PROJECT_STATUS.md файл
+
+### ВСЕГДА делай:
+- Читай PROJECT_STATUS.md перед началом работы
+- Используй Context7 MCP для получения документации
+- Валидируй все пользовательские данные через Zod
+- Добавляй PROGRESS комментарии в код
+- Обновляй PROJECT_STATUS.md после крупных изменений
+- Тестируй на мобильных устройствах
+- Используй позитивные формулировки в Health модуле
+
+### КРИТИЧНО для Health модуля:
+Это приложение о здоровье и красоте. Каждая функция должна способствовать здоровому образу жизни пользователей. Блокируй экстремальные значения, предупреждай о необходимости консультации с врачом, используй только мотивирующие и позитивные сообщения.
+
+---
+
+# ИНСТРУКЦИЯ ПО РАЗМЕЩЕНИЮ В CURSOR
+
+## Шаг 1: Создать .cursorrules файл
+```bash
+# В корне проекта C:\projects\onebeautyspace
+touch .cursorrules
+```
+
+## Шаг 2: Скопировать все правила
+Скопируй ВЕСЬ контент этого артефакта в файл .cursorrules
+
+## Шаг 3: Создать PROJECT_STATUS.md
+Создай файл PROJECT_STATUS.md в корне проекта с содержимым:
+
+```markdown
+# One Beauty App - Development Status
+
+## Completed Features ✅
+- [x] Project setup (Next.js 14 + TypeScript + Tailwind CSS)
+- [x] Prisma database connection (SQLite)
+- [x] Basic project structure (components, lib, stores, types)
+- [x] Cursor AI rules configuration
+- [x] MCP Context7 integration setup
+- [ ] User authentication system
+- [ ] Health module (Daily Wellness Score)
+- [ ] Studio module (booking system)
+- [ ] Store module (e-commerce)
+
+## Current Sprint: Project Foundation ✅
+**Status:** COMPLETED
+**Next Sprint:** Authentication Module
+
+## Components Created:
+None yet - ready to start development
+
+## API Routes Created:
+None yet - ready to start development
+
+## Database Schema:
+- User model (basic setup in prisma/schema.prisma)
+
+## Next Priority Tasks:
+1. Create basic app layout and navigation
+2. Implement user authentication (NextAuth.js)
+3. Build Health module foundation
+4. Design system and UI components
+
+## Architecture Decisions Made:
+- Next.js 14 App Router
+- TypeScript strict mode
+- Tailwind CSS for styling
+- Prisma + SQLite (dev) / PostgreSQL (prod)
+- Zustand for state management
+- React Hook Form + Zod validation
+
+Last updated: $(Get-Date -Format "2029-03-03 18:59")
