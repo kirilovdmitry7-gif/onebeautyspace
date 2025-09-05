@@ -55,6 +55,7 @@ Wellness палитра (зеленый #22c55e, бежевый)
 - Система точек восстановления
 - Создана страница Health Dashboard (`app/health/page.tsx`)
 - Компонент `DailyWellnessScore.tsx` реализован с умным состоянием (welcome, tracking, completed) и перемещен в `components/health/`
+- Создан базовый компонент `WellnessCards.tsx` с моковыми данными и UI
 
 ## Следующие задачи
 

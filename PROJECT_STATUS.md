@@ -22,6 +22,7 @@
 
 - Health Dashboard page (app/health/page.tsx)
 - DailyWellnessScore.tsx (smart state, welcome/tracking/completed modes, moved to `components/health/`)
+- WellnessCards.tsx (basic UI with mock data)
 
 ## API Routes Created:
 
