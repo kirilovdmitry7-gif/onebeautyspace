@@ -1,7 +1,6 @@
 "use client";
 
 import { Heart, Calendar, ShoppingCart, ArrowRight } from "lucide-react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function HomePage() {
@@ -123,19 +122,13 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => {
-                console.log("Создать аккаунт button clicked!");
-                signIn();
-              }}
+              onClick={() => router.push("/auth/signup")}
               className="bg-white text-emerald-600 px-8 py-3 rounded-xl font-medium hover:bg-emerald-50 transition-colors"
             >
               Создать аккаунт
             </button>
             <button
-              onClick={() => {
-                console.log("Начать с Health button clicked!");
-                router.push("/health");
-              }}
+              onClick={() => router.push("/auth/login")}
               className="border border-emerald-300 text-white px-8 py-3 rounded-xl font-medium hover:bg-emerald-600 transition-colors"
             >
               Начать с Health
