@@ -29,6 +29,14 @@ export const authOptions: NextAuthOptions = {
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest: async ({ identifier: email, url, provider }) => {
+        // For development, log the magic link to the console instead of sending an actual email
+        console.log(`\n--- Email Sign-in Link for ${email} ---`);
+        console.log(`Click here to sign in: ${url}`);
+        console.log(`---------------------------------------\n`);
+        // In a real production environment, you would use a proper email sending service here.
+        // For example, using nodemailer with a configured transport.
+      },
     }),
   ],
   pages: {
