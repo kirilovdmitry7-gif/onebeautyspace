@@ -30,12 +30,29 @@ export const authOptions: NextAuthOptions = {
       },
       from: process.env.EMAIL_FROM,
       sendVerificationRequest: async ({ identifier: email, url, provider }) => {
-        // For development, log the magic link to the console instead of sending an actual email
+        // In a real production environment, you would use a proper email sending service here.
+        // For example, using nodemailer with a configured transport.
+        // For now, we'll keep the console log for demonstration, but this should be replaced.
         console.log(`\n--- Email Sign-in Link for ${email} ---`);
         console.log(`Click here to sign in: ${url}`);
         console.log(`---------------------------------------\n`);
-        // In a real production environment, you would use a proper email sending service here.
-        // For example, using nodemailer with a configured transport.
+        // Example of a production email sending (requires nodemailer and a configured transport)
+        /*
+        const { host, port, secure, auth: { user, pass } } = provider.server;
+        const transport = nodemailer.createTransport({
+          host,
+          port,
+          secure,
+          auth: { user, pass },
+        });
+        await transport.sendMail({
+          to: email,
+          from: provider.from,
+          subject: `Sign in to One Beauty`,
+          text: `Click here to sign in: ${url}\n`,
+          html: `<p>Click here to sign in: <a href="${url}">${url}</a></p>`,
+        });
+        */
       },
     }),
   ],
@@ -90,6 +107,13 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-const handler = NextAuth(authOptions);
+import { NextApiRequest, NextApiResponse } from "next";
+
+// ... (rest of the file)
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(`Incoming NextAuth request: ${req.method} ${req.url}`);
+  return NextAuth(req, res, authOptions);
+};
 
 export { handler as GET, handler as POST };
