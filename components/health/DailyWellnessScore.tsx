@@ -184,39 +184,10 @@ export const DailyWellnessScore: React.FC<DailyWellnessScoreProps> = ({
           Ваш прогресс сегодня
         </h2>
 
-        <div className="relative w-32 h-32 mb-6">
-          <svg className="w-full h-full" viewBox="0 0 120 120">
-            <circle
-              className="text-gray-200"
-              strokeWidth="10"
-              stroke="currentColor"
-              fill="transparent"
-              r={radius}
-              cx="60"
-              cy="60"
-            />
-            <circle
-              className="text-emerald-600"
-              strokeWidth="10"
-              stroke="currentColor"
-              fill="transparent"
-              r={radius}
-              cx="60"
-              cy="60"
-              strokeDasharray={circumference.toString()}
-              strokeDashoffset={offset.toString()}
-              transform="rotate(-90 60 60)"
-            />
-            <text
-              x="50%"
-              y="50%"
-              dominantBaseline="middle"
-              textAnchor="middle"
-              className="fill-emerald-600 font-medium text-2xl"
-            >
-              {overallScore}%
-            </text>
-          </svg>
+        <div className="flex items-center justify-center w-24 h-24 rounded-full bg-emerald-100 mb-6">
+          <span className="text-emerald-600 font-bold text-2xl">
+            {overallScore}%
+          </span>
         </div>
 
         <p className="text-slate-600 text-lg mb-6">
