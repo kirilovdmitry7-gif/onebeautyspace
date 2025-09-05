@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@/lib/supabase/client";
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,7 +17,7 @@ export default function AuthForm() {
     setLoading(true);
     setMessage("");
 
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
     let error;
     if (isLogin) {
       const { error: signInError } = await supabase.auth.signInWithPassword({
