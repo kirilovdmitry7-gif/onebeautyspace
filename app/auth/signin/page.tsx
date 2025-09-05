@@ -28,14 +28,20 @@ export default function SignInPage() {
 
         <div className="space-y-4">
           <button
-            onClick={() => signIn("google", { callbackUrl: "/" })}
+            onClick={() => {
+              console.log("Google sign-in button clicked!");
+              signIn("google", { callbackUrl: "/" });
+            }}
             className="w-full flex items-center justify-center bg-white border border-slate-200 text-slate-700 px-6 py-3 rounded-xl font-medium hover:bg-slate-50 transition-colors shadow-sm"
           >
             <FcGoogle className="w-5 h-5 mr-3" />
             Войти с Google
           </button>
           <button
-            onClick={() => signIn("apple", { callbackUrl: "/" })}
+            onClick={() => {
+              console.log("Apple sign-in button clicked!");
+              signIn("apple", { callbackUrl: "/" });
+            }}
             className="w-full flex items-center justify-center bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors shadow-sm"
           >
             <FaApple className="w-5 h-5 mr-3" />
@@ -44,7 +50,10 @@ export default function SignInPage() {
 
           {!showEmailInput ? (
             <button
-              onClick={() => setShowEmailInput(true)}
+              onClick={() => {
+                console.log("Email sign-in button clicked (show input)!");
+                setShowEmailInput(true);
+              }}
               className="w-full flex items-center justify-center bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition-colors shadow-sm"
             >
               <MdEmail className="w-5 h-5 mr-3" />
@@ -60,7 +69,10 @@ export default function SignInPage() {
                 className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <button
-                onClick={handleEmailSignIn}
+                onClick={() => {
+                  console.log("Send email link button clicked!");
+                  handleEmailSignIn();
+                }}
                 className="w-full flex items-center justify-center bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-emerald-700 transition-colors shadow-sm"
               >
                 Отправить ссылку для входа

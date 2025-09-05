@@ -123,13 +123,19 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => signIn()}
+              onClick={() => {
+                console.log("Создать аккаунт button clicked!");
+                signIn();
+              }}
               className="bg-white text-emerald-600 px-8 py-3 rounded-xl font-medium hover:bg-emerald-50 transition-colors"
             >
               Создать аккаунт
             </button>
             <button
-              onClick={() => router.push("/health")}
+              onClick={() => {
+                console.log("Начать с Health button clicked!");
+                router.push("/health");
+              }}
               className="border border-emerald-300 text-white px-8 py-3 rounded-xl font-medium hover:bg-emerald-600 transition-colors"
             >
               Начать с Health
