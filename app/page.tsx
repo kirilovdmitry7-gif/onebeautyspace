@@ -1,6 +1,12 @@
+"use client";
+
 import { Heart, Calendar, ShoppingCart, ArrowRight } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 to-emerald-50">
       {/* Header */}
@@ -116,10 +122,22 @@ export default function HomePage() {
             записывайтесь на процедуры и покупайте качественную косметику
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-emerald-600 px-8 py-3 rounded-xl font-medium hover:bg-emerald-50 transition-colors">
+            <button
+              onClick={() => {
+                console.log("Создать аккаунт button clicked!");
+                signIn();
+              }}
+              className="bg-white text-emerald-600 px-8 py-3 rounded-xl font-medium hover:bg-emerald-50 transition-colors"
+            >
               Создать аккаунт
             </button>
-            <button className="border border-emerald-300 text-white px-8 py-3 rounded-xl font-medium hover:bg-emerald-600 transition-colors">
+            <button
+              onClick={() => {
+                console.log("Начать с Health button clicked!");
+                router.push("/health");
+              }}
+              className="border border-emerald-300 text-white px-8 py-3 rounded-xl font-medium hover:bg-emerald-600 transition-colors"
+            >
               Начать с Health
             </button>
           </div>
