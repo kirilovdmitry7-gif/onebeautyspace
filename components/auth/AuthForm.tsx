@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function AuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
+  const supabase = createClient();
+  const [isLogin, setIsLogin] = useState(mode === "login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,6 @@ export default function AuthForm() {
     setLoading(true);
     setMessage("");
 
-    const supabase = createClient();
     let error;
     if (isLogin) {
       const { error: signInError } = await supabase.auth.signInWithPassword({
